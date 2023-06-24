@@ -6,9 +6,8 @@ from pydantic import BaseModel
 class Event(BaseModel):
     id: int
     label: str
-    hasHappened: bool = False
-
+    count: int = 0
 
 class EventList(BaseModel):
-    id: str = uuid.uuid4()
+    """required for fastAPI"""
     events: List[Event] = []
