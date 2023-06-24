@@ -1,7 +1,7 @@
 from fastapi import WebSocket
 from src.models.incident import Incident
 from src.models.player import Player
-from src.utils.generateUniqueIds import generateUniqueUserId
+from src.utils.generateBingoCard import generateBingoCard
 from src.repository.instance import incidentRepository, playerRepository
 
 
@@ -28,6 +28,7 @@ class InMemoryGameRepository:
     def handleLobbyWsEvent(self, event):
         if event["type"] == "startGame":
             self.gameStart()
+            return generateBingoCard(self.incidents.getIncidents(), 14)
         elif event["type"] == "addIncident":
             self.incidents.addIncident(Incident(
                 id=event["id"], name=event["name"], count=0))

@@ -20,12 +20,14 @@ async def createAndConnect(websocket: WebSocket, name: str):
         while True:
             event = await websocket.recieve_json()
             if gameRepository.phase == "lobby":
-                handshake = gameRepository.handleLobbyWsEvent(event)
-                await websocket.send_json(handshake)
+                message = gameRepository.handleLobbyWsEvent(event)
+                for player in gameRepository.players.getPlayers():
+                    await player.websocket.send_json(message)
 
             if gameRepository.phase == "play":
-                handshake = gameRepository.handlePlayWsEvent(event)
-                await websocket.send_json(handshake)
+                message = gameRepository.handlePlayWsEvent(event)
+                for player in gameRepository.players.getPlayers():
+                    await player.websocket.send_json(message)
 
     except WebSocket.exceptions.ConnectionClosedError:
         Exception("Connection closed")
