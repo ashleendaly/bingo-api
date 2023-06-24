@@ -1,7 +1,7 @@
 import os
 import dotenv
 
-from src.repository.bingoRepository import InMemoryBingoRepository
+from src.repository.roomRepository import InMemoryRoomRepository
 
 dotenv.load_dotenv()
 
@@ -9,4 +9,4 @@ if os.getenv("DATABSE_URL"):
     # sets_database
     pass
 else:
-    bingo_repository = InMemoryBingoRepository()
+    roomRepository = InMemoryRoomRepository()
