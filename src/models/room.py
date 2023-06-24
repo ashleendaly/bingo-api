@@ -1,11 +1,10 @@
+from typing import List
 from pydantic import BaseModel
 
-from src.models.event import EventList
+from models.incident import Incident
 
 
 class Room(BaseModel):
-    code: str
-    usersJoined: set = set()
-    eventList: EventList = []
-    creatorId: str
+    id: str
+    incidentList: List(Incident) = []
     websocketConnecions: set = set()
