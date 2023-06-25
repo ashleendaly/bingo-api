@@ -2,17 +2,12 @@ import random
 import string
 import uuid
 
-from src.repository.instance import roomRepository
+
+def generateUniqueUserId():
+    return str(uuid.uuid4())
 
 
 def generateUniqueRoomCode():
     code = ''.join(random.choices(string.digits, k=6))
-
-    if roomRepository.roomExists(code):
-        return generateUniqueRoomCode()
-    else:
-        return code
-
-
-def generateUniqueUserId():
-    return str(uuid.uuid4())
+    return code
+    # TODO: Check if code is unique

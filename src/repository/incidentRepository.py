@@ -1,4 +1,4 @@
-from models.incident import Incident
+from src.models.incident import Incident
 
 
 class InMemoryIncidentRepository:
